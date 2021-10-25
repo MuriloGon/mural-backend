@@ -1,9 +1,11 @@
 const express = require('express')
 const cors = require('cors');
+
 const app = express();
 const PORT = 3001
 const server = require('http').createServer(app);
 
+app.use(cors());
 
 const io = require('socket.io')(server, {
   cors: {
@@ -12,15 +14,8 @@ const io = require('socket.io')(server, {
   }
 });
 
-const votesSocket = require('./sockets');
-votesSocket(io);
+const sockets = require('./sockets');
+sockets(io);
 
-
-app.use(cors());
-
-// app.get('/languages', async (req, res) => {
-//   const languages = await Language.getAll();
-//   res.status(200).json(languages);
-// });
 
 server.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
