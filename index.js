@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); 
 
 const app = express();
 app.use(express.json());
@@ -11,9 +11,8 @@ const io = require('socket.io')(http, {
     methods: ['GET', 'POST'], 
   }});
 
-io.on('connection', (socket) => {
-  socket.emit('ola', 'Bem vindo ao nosso chat!)');
-});
+require('./sockets/index')
+
 
 const PORT = process.env.PORT || 3000;
 
