@@ -1,10 +1,11 @@
 
-const socketio = require('socket.io');
+module.exports = (io) => {
+  io.on('connection', (socket) => {
+    console.log(`Cliente ${socket.id} acabou de entrar`);
 
-module.exports = (io) => io.on('connection', (socket) => {
-  socket.emit('serverMessage', 'Hello, wellcome to our chat!');
-  socket.broadcast.emit('serverMessage', `OW! ${socket.id} is already connected! :D`);
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('serverMessage', `OH! ${socket.id} We lost a warrior! :(`);
-  });
-}); 
+    socket.on('sendToAll', (data) => {
+      console.log( `${data.username}: ${data.message}`);
+      io.sockets.emit('serverMessage', `${data.username}: ${data.message}`);
+    });
+  })
+}
