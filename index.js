@@ -12,7 +12,7 @@ const io = require('socket.io')(http, {
   }});
 
 io.on('connection', (socket) => {
-  console.log(`User connected. ID: ${socket.id} `);
+  socket.emit('ola', 'Bem vindo ao nosso chat!)');
 });
 
 const PORT = process.env.PORT || 3000;
