@@ -1,5 +1,10 @@
 const express = require('express');
+<<<<<<< HEAD
 const cors = require('cors');
+=======
+const cors = require('cors'); 
+
+>>>>>>> aa8393f2211360132174be9e846565065ce97009
 const app = express();
 
 const http = require('http').createServer(app);
@@ -20,6 +25,7 @@ io.on('connection', (socket) => {
 
 
 });
+require('./sockets/index')
 
 io.on('sendToAll', (socket) => {
   console.log(socket)
